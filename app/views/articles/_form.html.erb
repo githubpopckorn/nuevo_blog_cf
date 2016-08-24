@@ -1,0 +1,24 @@
+<% accion ||= "Crear" %>
+<h1><%= accion%> Artículo</h1>
+<%= form_for(@article) do |f| %>
+	
+	
+	<% @article.errors.full_messages.each do |message| %>
+		*<%= message%>
+		<br>
+	<% end	%>
+
+
+	<div class="form-group">
+	    <label for="exampleInputEmail1">Titulo</label>
+	    <%= f.text_field :title, placeholder: "Titulo", class: "form-control" %>
+  	</div>
+
+  	<div class="form-group">
+	    <label for="exampleInputEmail1">Cuerpo</label>
+	    <%= f.text_area :body, placeholder: "Escribe tu articulo", class: "form-control"%>
+  	</div>
+
+  	<%= f.submit "Guardar", class: "btn btn-default" %>
+
+<% end %>

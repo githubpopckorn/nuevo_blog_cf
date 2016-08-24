@@ -1,0 +1,23 @@
+ 	<nav class="navbar navbar-inverse navbar-static-top">
+		<div class="container">
+
+			<%= link_to "Home", root_path, class: "navbar-brand"%>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="">Diseño</a></li>
+                <li><a href="">Programación</a></li>
+                <li><a href="">Tecnología</a></li>
+            </ul>
+
+            <% if user_signed_in? %>
+              <ul class="nav navbar-nav navbar-right">
+                <li><%= link_to "Cerrar sesión", destroy_user_session_path, method: :delete %></li>
+              </ul>
+            <% else %>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><%= link_to "Iniciar sesión", new_user_session_path %></li>
+                    <li><%= link_to "Crear cuenta", new_user_registration_path %></li>
+                </ul>
+            <% end %>
+            
+		</div>
+	</nav>
