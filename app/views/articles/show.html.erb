@@ -9,7 +9,9 @@
 		Visitas: <%= @article.visits_count %>
 	</p>
 <% end %>
-
+<div class="field">
+    <%= image_tag @article.cover.url(:thumb)%>
+</div>
 <div>
 	<%= @article.body %>
 </div>
@@ -18,6 +20,9 @@
 	<h3>Cometnarios</h3>
 	<%= render "comments/form" %>
 	<ul id="comments-box">
+	    
+	</ul>
+	<ul>
 		<% @article.comments.each do |comment| %>
 			<li>
 				<%= comment.body %> - <%= comment.user.email %>

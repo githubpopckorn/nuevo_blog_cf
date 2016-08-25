@@ -1,13 +1,16 @@
  	<nav class="navbar navbar-inverse navbar-static-top">
 		<div class="container">
 
-			<%= link_to "Home", root_path, class: "navbar-brand"%>
+			<%= link_to "Blog Facilito", root_path, class: "navbar-brand"%>
             <ul class="nav navbar-nav">
-                <li class="active"><a href="">Diseño</a></li>
-                <li><a href="">Programación</a></li>
-                <li><a href="">Tecnología</a></li>
+               <li><%= link_to "Articulos", articles_path %> </li>
+               <% @categories.each do |category|  %>
+                <li>
+                    <%= link_to category.name, category %>
+                </li>
+            <% end %>
+               
             </ul>
-
             <% if user_signed_in? %>
               <ul class="nav navbar-nav navbar-right">
                 <li><%= link_to "Cerrar sesión", destroy_user_session_path, method: :delete %></li>
