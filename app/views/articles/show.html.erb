@@ -4,7 +4,13 @@
 	<p>
 		Escrito por: <%= @article.user.email %>
 	</p>
-
+    
+    <div class="field">
+        <% @article.categories.each do |category| %>
+            <%= link_to category.name, category, style: "color:#{category.color}"%>
+        <% end %>
+    </div>
+    
 	<p>
 		Visitas: <%= @article.visits_count %>
 	</p>
