@@ -2,11 +2,11 @@ class ArticlesController < ApplicationController
 	before_action :authenticate_user!, except:[:show,:index]
 	before_action :set_article, except: [:index, :new, :create]
     before_action :authenticate_editor!, only: [:new, :create, :update]
-    before_action :authenticate_admin!, only: [:destroy]
+    before_action :authenticate_admin!, only: [:destroy, :publish]
 	#GET /articles
 	def index
 		#Obtiene todos los registros de la tabla
-		@articles = Article.all
+		@articles = Article.publicados.ultimos
 	end
 
 	#GET /articles/:id
@@ -29,11 +29,16 @@ class ArticlesController < ApplicationController
 		#Article.where.not("id = 1").count
 	end
 
+    
+    
 	#GET /articles/new
 	def new
 		@article = Article.new
         @categories = Category.all
 	end
+    
+    
+    
 
 	#POST /articles
 	def create
@@ -51,10 +56,13 @@ class ArticlesController < ApplicationController
 	end
 
 
+    
 	def edit
 		#@article = Article.find(params[:id])
 	end
 
+    
+    
 	#PUT /articles/:
 	def update
 		#@article.update_attributes({title: 'nuevo titulo'})
@@ -66,6 +74,8 @@ class ArticlesController < ApplicationController
 		end
 	end
 
+    
+    
 	#DELETE /articles/:id
 	def destroy
 		#@article = Article.find(params[:id])
@@ -73,6 +83,14 @@ class ArticlesController < ApplicationController
 		redirect_to articles_path
 	end
 
+    
+    #PUT /articles/:id/publish
+    def publish
+        @article.publish!
+        redirect_to @article
+    end
+    
+    
 	private
 	def article_params
 		params.require(:article).permit(:title, :body, :cover, :categories)

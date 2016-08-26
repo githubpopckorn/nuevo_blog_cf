@@ -9,6 +9,12 @@ class Article < ApplicationRecord
     after_create :save_categories
     
     
+    scope :publicados, ->{ where(state: "published") }
+    scope :ultimos, -> {order("created_at DESC").limit(10)}
+#    def self.publicados
+#        Article.where(state: "published")
+#    end
+    
     def categories=(value)
         @categories = value
     end
