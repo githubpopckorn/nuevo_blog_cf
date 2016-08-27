@@ -7,6 +7,7 @@ class Article < ApplicationRecord
 	validates :title, presence: true, uniqueness: true
 	validates :body, presence:true, length: {minimum: 20}
     after_create :save_categories
+    after_create :send_mail
     
     
     scope :publicados, ->{ where(state: "published") }
@@ -60,4 +61,8 @@ class Article < ApplicationRecord
 	def set_visits_count
 		self.visits_count = 0;
 	end
+    
+    def send_mail
+        ArticleMailer.new_article(self).deliver_later
+    end
 end
