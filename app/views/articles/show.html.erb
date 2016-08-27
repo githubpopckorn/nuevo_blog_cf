@@ -1,9 +1,28 @@
-<h1><%= @article.title %></h1>
+<article>
+    <div class="row">
+        <div class=" text-center light-border col-md-8 col-md-offset-2">
+            <h1 class="blue"><%= @article.title %></h1>
+            <p class="text-right small"><u>
+                <%= link_to "Atrás", articles_path %></u> -
+                <span class="red"><%= @article.visits_count %> visita(s)</span> - 
+                <% unless @article.user.nil? %>
+                    Escrito por: <%= @article.user.email %>
+                <% end %>
+            </p>
+            <div class="text-justify top-space">
+                <%= @article.body %>
+            </div>
+            
+            <div class="top-space">
+                <%= render "articles/comments" %>
+            </div>
+        </div>
+    </div>
+</article>
 
-<% unless @article.user.nil? %>
-	<p>
-		Escrito por: <%= @article.user.email %>
-	</p>
+
+
+	
     
     <div class="field">
         <% @article.categories.each do |category| %>
@@ -14,12 +33,12 @@
 	<p>
 		Visitas: <%= @article.visits_count %>
 	</p>
-<% end %>
+
 <div class="field">
     <%= image_tag @article.cover.url(:thumb)%>
 </div>
 <div>
-	<%= @article.body %>
+	
 </div>
 
 <div>
