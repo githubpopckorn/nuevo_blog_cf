@@ -10,11 +10,14 @@
 
   <%= render "partials/navigation" %>
 
-  <div class="container">
+ 
   	<body>
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
+     <div style="<%= "display:none;" if notice.nil? and alert.nil?%>">
+          <p class="notice"><%= notice %></p>
+          <p class="alert"><%= alert %></p>
+     </div>
+
 	    <%= yield %>
 	  </body>
-  </div>
+
 </html>
